@@ -1,5 +1,7 @@
-bashez
+Apparatus
 ======
+
+"Apparatus" is latin and means "Machine".
 
 Collection of web developer automation tools.
 
