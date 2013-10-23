@@ -3,10 +3,11 @@ bashez
 
 Collection of web developer automation tools.
 
-Right now
+Short term goals
 ---
-
+- Finishing automated git branching/deploying and DB-Sync Tools in matters of Wordpress
+- Finishing automated Wordpress Directory Permissions (ReadWrite/Ownership)
 
 Long term goals
 ---
-My long-term target is to build a automation framework for web developers.
+- Build a automation framework for web developers.
