@@ -1,4 +1,9 @@
 #!/bin/bash
+
+## apparatus WP-PERM
+## Coded with <3 by Jeremy J. Zahner
+## Gihub-Repo: https://github.com/jeremyzahner/apparatus
+
 echo 'Script starting...'
 #
 echo 'The Wordpress directory is '$PWD
