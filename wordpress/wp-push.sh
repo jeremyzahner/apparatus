@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## apparatus WP-PUSH
-## Coded with <3 by Jeremy J. Zahner
+## Coded with workflow in mind by Jeremy J. Zahner
 ## Gihub-Repo: https://github.com/jeremyzahner/apparatus
 
 ## CONFIGURATION
