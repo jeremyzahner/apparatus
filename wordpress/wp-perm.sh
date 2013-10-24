@@ -20,7 +20,7 @@ sudo find wp-content/cache/ -exec chmod 777 {} \;
 sudo find ./* -type d -exec chmod g+s {} \;
 #
 echo 'All went well. Enter [Quit] to exit.'
-read COMMANDE
-if [ $COMMANDE = QUIT ]
+read COMMAND
+if [ $COMMAND = QUIT ]
 	then exit
 fi

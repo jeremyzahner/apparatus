@@ -14,4 +14,4 @@ Short term goals
 
 Long term goals
 ---
-- Build a automation framework for web developers.
+- Build a automation framework for web-developers.
