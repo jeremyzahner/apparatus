@@ -22,7 +22,7 @@ stage_db_pw='X_DBPASSWORD_X';
 stage_db_name='X_DBNAME_X';
 stage_path='/home/www-data/stage/X_PROJECTNAME_X';
 #--Live
-live_ssh_host='X_SSHHOST_X.nine.ch';
+live_ssh_host='X_SSHHOST_X';
 live_ssh_user='X_SSHHOST_X';
 live_ssh_pw='X_SSHPASSWORD_X';
 live_db_host='X_DBHOST_X';
