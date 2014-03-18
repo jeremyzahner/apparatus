@@ -28,19 +28,19 @@ Long term goals
 Setup General
 ---
 - Pull this repository anywhere.
-..- ```bash git pull git@github.com:jeremyzahner/Apparatus.git```
+  - ```git pull git@github.com:jeremyzahner/Apparatus.git```
 - Enter the "Config" directory.
-..- ```cd Config```
+  - ```cd Config```
 - Edit .bash_aliases so it points to the right direction. Here you need to replace "APPARATUS_LOCATION" by the absolute path where you pulled Apparatus to.
-..- ```gedit .bash_aliases``` or ```vim .bash_aliases``` or any other editor you'd like to use.
+  - ```gedit .bash_aliases``` or ```vim .bash_aliases``` or any other editor you'd like to use.
 - Make a copy of .bash_aliases and put it into your home directory. There it gets caught by the default bash profile script.
-..- ```cp -v .bash_aliases $HOME```
+  - ```cp -v .bash_aliases $HOME```
 
 Setup Wordpress
 ---
 - Make a copy of devconfig.txt and put it into your wordpress root directory.
-..- ```cp -v devconfig.txt /var/www/WORDPRESS_ROOT``` or ```cp -v devconfig.txt ~/public_html/WORDPRESS_ROOT``` or ```cp -v devconfig.txt ~/www/WORDPRESS_ROOT``` depending on your setup.
-..- Make sure to replace "WORDPRESS_ROOT" by the directory your wordpress stays in.
+  - ```cp -v devconfig.txt /var/www/WORDPRESS_ROOT``` or ```cp -v devconfig.txt ~/public_html/WORDPRESS_ROOT``` or ```cp -v devconfig.txt ~/www/WORDPRESS_ROOT``` depending on your setup.
+  - Make sure to replace "WORDPRESS_ROOT" by the directory your wordpress stays in.
 
 Usage General
 ---
