@@ -1,0 +1,6 @@
+alias setupdomain='APPARATUS_LOCATION/1_General/setupdomain.sh'
+alias archivedomain='APPARATUS_LOCATION/1_General/archivedomain.sh'
+alias removedomain='APPARATUS_LOCATION/1_General/removedomain.sh'
+alias dirbash='APPARATUS_LOCATION/1_General/dirbash.sh'
+alias wp-pushstate='APPARATUS_LOCATION/2_Wordpress/wp-pushstate.sh'
+alias wp-dirbash='APPARATUS_LOCATION/2_Wordpress/wp-dirbash.sh'
