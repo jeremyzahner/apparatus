@@ -3,7 +3,7 @@ CONFIGURATION EXAMPLE
 # Local
 ########
 	local_db_host=''; # MYSQL Host
-	local_db_user='';	# MYSQL Username
+	local_db_user=''; # MYSQL Username
 	local_db_pw='';	# MYSQL Password
 	local_db_name=''; # MYSQL DB Name
 	local_path=''; # Absolute Path to the application/site root folder
@@ -16,7 +16,7 @@ CONFIGURATION EXAMPLE
 	dev_ssh_pw=''; # SSH Password
 	dev_db_host=''; # MYSQL Host
 	dev_db_user=''; # MYSQL Username
-	dev_db_pw='';	# MYSQL Password
+	dev_db_pw=''; # MYSQL Password
 	dev_db_name='';	# MYSQL DB Name
 	dev_path=''; # Absolute Path to the application/site root folder
 	dev_assets_path=''; # Absolute Path to the application/site assets folder
@@ -31,7 +31,7 @@ CONFIGURATION EXAMPLE
 	stage_db_pw=''; # MYSQL Password
 	stage_db_name=''; # MYSQL DB Name
 	stage_path=''; # Absolute Path to the application/site root folder
-	stage_assets_path='';	# Absolute Path to the application/site assets folder
+	stage_assets_path=''; # Absolute Path to the application/site assets folder
 ########
 # Live
 ########
