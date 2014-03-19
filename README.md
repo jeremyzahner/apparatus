@@ -24,6 +24,7 @@ Short term goals
 Long term goals
 ---
 - Build an automation framework for web-developers, maybe add a GUI for Developers not familiar with CLI someday.
+- Port this to NodeJS.
 
 Setup General
 ---
