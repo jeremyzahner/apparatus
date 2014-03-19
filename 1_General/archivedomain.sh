@@ -14,7 +14,6 @@ echo $'\n'"Enter full domain (for Example testdrive.local.dev, without www)"$'\n
 
 read domain
 
-
 domaindir="$HOME/public_html/$domain"
 archivedir="$HOME/public_html/x_Archiv"
 apachesa="/etc/apache2/sites-available"
@@ -31,7 +30,15 @@ sudo service apache2 reload
 
 # Remove DIR For Sub Domain
 echo $'\n'"MOVING SUB DIRECTORY FOR '$domain' DEV SITE TO ARCHIVE"$'\n'
+
 mv $domaindir $archivedir
+
+cd $archivedir
+zip -v -r $domain.zip $domain
+echo $'\n'
+
+rm -v -r $archivedir/$domain
+echo $'\n'
 
 # Move Vhost to Archive
 mv $vhost $apachearchive

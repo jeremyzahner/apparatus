@@ -2,30 +2,45 @@ CONFIGURATION EXAMPLE
 ########
 # Local
 ########
-	local_db_host='localhost';
-	local_db_user='root';
-	local_db_pw='Tagblatt102876';
-	local_db_name='LOCAL_DB';
-	local_path='/home/jzahner/public_html/LOCAL_DOMAIN';
+	local_db_host=''; 		# MYSQL Host
+	local_db_user='';			# MYSQL Username
+	local_db_pw='';				# MYSQL Password
+	local_db_name='';			# MYSQL DB Name
+	local_path='';				# Absolute Path to the application/site root folder
+	local_assets_path='';	# Absolute Path to the application/site assets folder
 ########
 # Dev
 ########
-	dev_ssh_host='ammarkt2.nine.ch';
-	dev_ssh_user='www-data';
-	dev_ssh_pw='Belb0ort';
-	dev_db_host='localhost';
-	dev_db_user='db';
-	dev_db_pw='motAbNes';
-	dev_db_name='DEV_DB';
-	dev_path='/home/www-data/DEV_DOMAIN';
+	dev_ssh_host='';			# SSH Host
+	dev_ssh_user='';			# SSH Username
+	dev_ssh_pw='';				# SSH Password
+	dev_db_host='';				# MYSQL Host
+	dev_db_user='';				# MYSQL Username
+	dev_db_pw='';					# MYSQL Password
+	dev_db_name='';				# MYSQL DB Name
+	dev_path='';					# Absolute Path to the application/site root folder
+	dev_assets_path='';		# Absolute Path to the application/site assets folder
 ########
 # Stage
 ########
-	stage_ssh_host='ammarkt2.nine.ch';
-	stage_ssh_user='www-data';
-	stage_ssh_pw='Belb0ort';
-	stage_db_host='localhost';
-	stage_db_user='db';
-	stage_db_pw='motAbNes';
-	stage_db_name='STAGE_DB';
-	stage_path='/home/www-data/STAGE_DOMAIN';
+	stage_ssh_host='';		# SSH Host
+	stage_ssh_user='';		# SSH Username
+	stage_ssh_pw='';			# SSH Password
+	stage_db_host='';			# MYSQL Host
+	stage_db_user='';			# MYSQL Username
+	stage_db_pw='';				# MYSQL Password
+	stage_db_name='';			# MYSQL DB Name
+	stage_path='';				# Absolute Path to the application/site root folder
+	stage_assets_path='';	# Absolute Path to the application/site assets folder
+########
+# Live
+########
+	live_ssh_host='';			# SSH Host
+	live_ssh_user='';			# SSH Username
+	live_ssh_pw='';				# SSH Password
+	live_db_host='';			# MYSQL Host
+	live_db_user='';			# MYSQL Username
+	live_db_pw='';				# MYSQL Password
+	live_db_name='';			# MYSQL DB Name
+	live_path='';					# Absolute Path to the application/site root folder
+	live_assets_path='';	# Absolute Path to the application/site assets folder
