@@ -1,6 +1,8 @@
 Apparatus
 ======
 
+*THIS PROJECT IS IN ALPHA PHASE*
+
 "Apparatus" is latin and means "Machine".
 
 Collection of web developer automation tools.
