@@ -2,45 +2,45 @@ CONFIGURATION EXAMPLE
 ########
 # Local
 ########
-	local_db_host=''; 		# MYSQL Host
-	local_db_user='';			# MYSQL Username
-	local_db_pw='';				# MYSQL Password
-	local_db_name='';			# MYSQL DB Name
-	local_path='';				# Absolute Path to the application/site root folder
+	local_db_host=''; # MYSQL Host
+	local_db_user='';	# MYSQL Username
+	local_db_pw='';	# MYSQL Password
+	local_db_name=''; # MYSQL DB Name
+	local_path=''; # Absolute Path to the application/site root folder
 	local_assets_path='';	# Absolute Path to the application/site assets folder
 ########
 # Dev
 ########
-	dev_ssh_host='';			# SSH Host
-	dev_ssh_user='';			# SSH Username
-	dev_ssh_pw='';				# SSH Password
-	dev_db_host='';				# MYSQL Host
-	dev_db_user='';				# MYSQL Username
-	dev_db_pw='';					# MYSQL Password
-	dev_db_name='';				# MYSQL DB Name
-	dev_path='';					# Absolute Path to the application/site root folder
-	dev_assets_path='';		# Absolute Path to the application/site assets folder
+	dev_ssh_host=''; # SSH Host
+	dev_ssh_user=''; # SSH Username
+	dev_ssh_pw=''; # SSH Password
+	dev_db_host=''; # MYSQL Host
+	dev_db_user=''; # MYSQL Username
+	dev_db_pw='';	# MYSQL Password
+	dev_db_name='';	# MYSQL DB Name
+	dev_path=''; # Absolute Path to the application/site root folder
+	dev_assets_path=''; # Absolute Path to the application/site assets folder
 ########
 # Stage
 ########
-	stage_ssh_host='';		# SSH Host
-	stage_ssh_user='';		# SSH Username
-	stage_ssh_pw='';			# SSH Password
-	stage_db_host='';			# MYSQL Host
-	stage_db_user='';			# MYSQL Username
-	stage_db_pw='';				# MYSQL Password
-	stage_db_name='';			# MYSQL DB Name
-	stage_path='';				# Absolute Path to the application/site root folder
+	stage_ssh_host=''; # SSH Host
+	stage_ssh_user=''; # SSH Username
+	stage_ssh_pw=''; # SSH Password
+	stage_db_host=''; # MYSQL Host
+	stage_db_user=''; # MYSQL Username
+	stage_db_pw=''; # MYSQL Password
+	stage_db_name=''; # MYSQL DB Name
+	stage_path=''; # Absolute Path to the application/site root folder
 	stage_assets_path='';	# Absolute Path to the application/site assets folder
 ########
 # Live
 ########
-	live_ssh_host='';			# SSH Host
-	live_ssh_user='';			# SSH Username
-	live_ssh_pw='';				# SSH Password
-	live_db_host='';			# MYSQL Host
-	live_db_user='';			# MYSQL Username
-	live_db_pw='';				# MYSQL Password
-	live_db_name='';			# MYSQL DB Name
-	live_path='';					# Absolute Path to the application/site root folder
-	live_assets_path='';	# Absolute Path to the application/site assets folder
+	live_ssh_host=''; # SSH Host
+	live_ssh_user=''; # SSH Username
+	live_ssh_pw=''; # SSH Password
+	live_db_host=''; # MYSQL Host
+	live_db_user=''; # MYSQL Username
+	live_db_pw=''; # MYSQL Password
+	live_db_name=''; # MYSQL DB Name
+	live_path=''; # Absolute Path to the application/site root folder
+	live_assets_path=''; # Absolute Path to the application/site assets folder
