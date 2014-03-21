@@ -3,9 +3,9 @@
 ############################################################################
 # Created by Jeremy "Jay" Zahner (@jeremyzahner)
 #  
-# First Release
+# Alpha Release
 #
-#	Version: 1.1.0
+#	Version: 0.1.1
 ############################################################################
 
 ## CONFIGURATION
@@ -18,7 +18,7 @@ echo $'\n''Push State to Dev / Stage / Live (dev/stage/live)?'$'\n'
 #
 read TARGET
 
-if [ "$TARGET" = dev ]
+if [ "$TARGET" = dev ] || [ "$TARGET" = Dev ] || [ "$TARGET" = DEV ]
 then
 ###
 	#
@@ -26,16 +26,16 @@ then
 	#
 	read CHOICE
 
-	if [ "$CHOICE" = A ]
+	if [ "$CHOICE" = a ] || [ "$CHOICE" = A ]
 	then
 		##
 		echo $'\n''Pushing Assets to Dev now...'$'\n'
-		sshpass -p$dev_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path $dev_ssh_user@$dev_ssh_host:$dev_assets_path && \
+		sshpass -p$dev_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path/* $dev_ssh_user@$dev_ssh_host:$dev_assets_path/ && \
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 	fi
 
-	if [ "$CHOICE" = D ]
+	if [ "$CHOICE" = d ] || [ "$CHOICE" = D ]
 	then
 		##
 		echo $'\n''Pushing DB to Dev now...'$'\n'
@@ -48,11 +48,11 @@ then
 		##
 	fi
 
-	if [ "$CHOICE" = AD ]
+	if [ "$CHOICE" = ad ] || [ "$CHOICE" = AD ]
 	then
 		##
 		echo $'\n''Pushing Assets to Dev now...'$'\n'
-		sshpass -p$dev_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path $dev_ssh_user@$dev_ssh_host:$dev_assets_path && \
+		sshpass -p$dev_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path/* $dev_ssh_user@$dev_ssh_host:$dev_assets_path/ && \
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 		echo $'\n''Pushing DB to Dev now...'$'\n'
@@ -66,7 +66,7 @@ then
 	fi
 fi
 ##
-if [ "$TARGET" = stage ]
+if [ "$TARGET" = stage ] || [ "$TARGET" = Stage ] || [ "$TARGET" = STAGE ]
 then
 ###
 	#
@@ -74,16 +74,16 @@ then
 	#
 	read CHOICE
 
-	if [ "$CHOICE" = A ]
+	if [ "$CHOICE" = a ] || [ "$CHOICE" = A ]
 	then
 		##
 		echo $'\n''Pushing Assets to Stage now...'$'\n'
-		sshpass -p$stage_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path $stage_ssh_user@$stage_ssh_host:$stage_assets_path && \
+		sshpass -p$stage_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path/* $stage_ssh_user@$stage_ssh_host:$stage_assets_path/ && \
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 	fi
 
-	if [ "$CHOICE" = D ]
+	if [ "$CHOICE" = d ] || [ "$CHOICE" = D ]
 	then
 		##
 		echo $'\n''Pushing DB to Stage now...'$'\n'
@@ -96,14 +96,14 @@ then
 		##
 	fi
 
-	if [ "$CHOICE" = AD ]
+	if [ "$CHOICE" = ad ] || [ "$CHOICE" = AD ]
 	then
 		##
 		echo $'\n''Pushing Assets to Stage now...'$'\n'
-		sshpass -p$stage_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path $stage_ssh_user@$stage_ssh_host:$stage_assets_path && \
+		sshpass -p$stage_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path/* $stage_ssh_user@$stage_ssh_host:$stage_assets_path/ && \
 		echo $'\n''All Assets pushed!'$'\n'
 		##
-		echo $'\n''Pushing DB to Stage now...'$'\n'
+		echo $'\n''Pushing DB to Dev now...'$'\n'
 		mysqldump -u $local_db_user -p$local_db_pw $local_db_name > $local_assets_path/dbsync.sql && \
 
 		sshpass -p$stage_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path/dbsync.sql $stage_ssh_user@$stage_ssh_host:$stage_assets_path/dbsync.sql && \
@@ -113,8 +113,8 @@ then
 		##
 	fi
 fi
-###
-if [ "$TARGET" = live ]
+##
+if [ "$TARGET" = live ] || [ "$TARGET" = Live ] || [ "$TARGET" = LIVE ]
 then
 ###
 	#
@@ -122,16 +122,16 @@ then
 	#
 	read CHOICE
 
-	if [ "$CHOICE" = A ]
+	if [ "$CHOICE" = a ] || [ "$CHOICE" = A ]
 	then
 		##
 		echo $'\n''Pushing Assets to Live now...'$'\n'
-		sshpass -p$live_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path $live_ssh_user@$live_ssh_host:$live_assets_path && \
+		sshpass -p$live_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path/* $live_ssh_user@$live_ssh_host:$live_assets_path/ && \
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 	fi
 
-	if [ "$CHOICE" = D ]
+	if [ "$CHOICE" = d ] || [ "$CHOICE" = D ]
 	then
 		##
 		echo $'\n''Pushing DB to Live now...'$'\n'
@@ -144,11 +144,11 @@ then
 		##
 	fi
 
-	if [ "$CHOICE" = AD ]
+	if [ "$CHOICE" = ad ] || [ "$CHOICE" = AD ]
 	then
 		##
 		echo $'\n''Pushing Assets to Live now...'$'\n'
-		sshpass -p$live_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path $live_ssh_user@$live_ssh_host:$live_assets_path && \
+		sshpass -p$live_ssh_pw rsync -r -v --progress --update -e "ssh" $local_assets_path/* $live_ssh_user@$live_ssh_host:$live_assets_path/ && \
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 		echo $'\n''Pushing DB to live now...'$'\n'

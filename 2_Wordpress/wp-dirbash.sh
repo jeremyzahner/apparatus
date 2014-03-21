@@ -3,9 +3,9 @@
 ############################################################################
 #	Created by Jeremy "Jay" Zahner (@jeremyzahner)
 #  
-#	First Release
+#	Alpha Release
 #
-#	Version: 1.1.0
+#	Version: 0.1.0
 ############################################################################
 
 echo $'\n''Script starting...'$

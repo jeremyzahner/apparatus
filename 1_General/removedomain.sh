@@ -3,9 +3,9 @@
 ############################################################################
 #	Created by Jeremy "Jay" Zahner (@jeremyzahner)
 #  
-#	First Release
+#	Alpha Release
 #
-#	Version: 1.0.0
+#	Version: 0.1.0
 ############################################################################
 
 echo $'\n'"This Script was designed for use on a local Ubuntu (or similar Linux) Development Platform, DO NOT use it else where as it may break your system."
