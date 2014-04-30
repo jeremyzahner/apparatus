@@ -5,51 +5,47 @@
 #  
 #	Alpha Release
 #
-#	Version: 0.1.0
+#	Version: 0.1.1
 ############################################################################
+
+## CONFIGURATION
+source $PWD/apparatus.conf
 
 echo $'\n''Script starting...'$
 ###########
-echo $'\n''The Wordpress directory is '$PWD
-echo $'\n''Are your uploads stored in a special place (i.e. ./assets)? Enter the Path like described (relative to the current location, which should be the WP-Root), leave empty if all is default.'$'\n'
+echo $'\n''The Wordpress directory is '$local_path
+echo $'\n''Your Uploads/Assets are stored in '$local_assets_path'.'$'\n'
 ###########
-read CHOICE
-###########
-if [ -z "$CHOICE" ]
+if [ ! -d $local_assets_path ]
 then
-	echo $'\n''Your media is stored in its default location.'$'\n'
-	if [ ! -d ./wp-content/uploads/ ]
-	then
-		sudo mkdir wp-content/uploads/
-	fi
-else
-	echo $'\n''Your Media is stored in '$CHOICE'.'$'\n'
-	if [ ! -d ./$CHOICE ]
-	then
-		sudo mkdir $CHOICE
-	fi
+	sudo mkdir $local_assets_path
 fi
 ###########
-if [ ! -d ./wp-content/cache/ ]
+if [ ! -d $local_path/wp-content/cache/ ]
 then
-	sudo mkdir wp-content/cache/
+	sudo mkdir $local_path/wp-content/cache/
 fi
 ###########
-if [ ! -d ./wp-content/upgrades/ ]
+if [ -d $local_path/wp-content/upgrade/ ]
 then
-	sudo mkdir wp-content/upgrades/
+	sudo rm -r $local_path/wp-content/upgrade/
 fi
 ###########
-if [ ! -d ./wp-content/plugins/ ]
+if [ -d $local_path/wp-content/upgrades/ ]
 then
-	sudo mkdir wp-content/plugins/
+	sudo rm -r $local_path/wp-content/upgrades/
+fi
+###########
+if [ ! -d $local_path/wp-content/plugins/ ]
+then
+	sudo mkdir $local_path/wp-content/plugins/
 fi
 ###########
 sudo chown -R www-data:webmasters ./*
-sudo find ./* -type f -exec chmod 664 {} \; 
-sudo find ./* -type d -exec chmod 775 {} \;
-sudo find wp-content/cache/ -exec chmod 777 {} \;  
-sudo find ./* -type d -exec chmod g+s {} \;
+sudo find $local_path/* -type f -exec chmod 664 {} \; 
+sudo find $local_path/* -type d -exec chmod 775 {} \;
+sudo find $local_path/wp-content/cache/ -exec chmod 777 {} \;  
+sudo find $local_path/* -type d -exec chmod g+s {} \;
 #
 echo $'\n''All went well. Thanks for using!'$'\n'
 #
