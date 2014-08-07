@@ -36,20 +36,9 @@ then
 	sudo mkdir $my_webroot/$local_rel_assets_path
 fi
 ###########
-if [ ! -d $my_webroot/$local_rel_path/wp-content/cache/ ]
-then
-	sudo mkdir $my_webroot/$local_rel_path/wp-content/cache/
-fi
-###########
-if [ ! -d $my_webroot/$local_rel_path/wp-content/plugins/ ]
-then
-	sudo mkdir $my_webroot/$local_rel_path/wp-content/plugins/
-fi
-###########
 sudo chown -R www-data:webmasters ./*
 sudo find $my_webroot/$local_rel_path/* -type f -exec chmod 664 {} \; 
 sudo find $my_webroot/$local_rel_path/* -type d -exec chmod 775 {} \;
-sudo find $my_webroot/$local_rel_path/wp-content/cache/ -exec chmod 777 {} \;  
 sudo find $my_webroot/$local_rel_path/* -type d -exec chmod g+s {} \;
 #
 echo $'\n''All went well. Thanks for using!'$'\n'

@@ -14,14 +14,14 @@ echo $'\n'"Enter full domain (for Example testdrive.local.dev, without www)"$'\n
 
 read domain
 
-
 domaindir="$HOME/public_html/$domain"
 apachesa="/etc/apache2/sites-available"
 
 # Create New DIR For Sub Domain
 echo $'\n'"CREATING SUB DIRECTORY FOR '$domain' DEV SITE"$'\n'
+
 mkdir $domaindir
-mkdir $domaindir/log
+mkdir $HOME/public_html/log/$domain
 
 sudo chown -R www-data:webmasters $domaindir
 sudo find $domaindir -type f -exec chmod 664 {} \; 
@@ -61,13 +61,13 @@ sudo bash -c "cat >> $apachesa/$domain.conf" << ENDCAT
 		Require all granted
 	</Directory>
 
-	ErrorLog $domaindir/log/error.log
+	ErrorLog $HOME/public_html/log/$domain/error.log
 
 	# Possible values include: debug, info, notice, warn, error, crit,
 	# alert, emerg.
 	LogLevel warn
 
-	CustomLog $domaindir/log/access.log combined
+	CustomLog $HOME/public_html/log/$domain/access.log combined
 
 </VirtualHost>
 

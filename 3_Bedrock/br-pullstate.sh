@@ -61,7 +61,7 @@ then
 
 		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
 
-		cd $my_webroot/$local_rel_path/ && wp search-replace $dev_domain $local_domain
+		cd $local_path && wp search-replace $dev_domain $local_domain
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
@@ -82,7 +82,7 @@ then
 
 		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
 
-		cd $my_webroot/$local_rel_path/ && wp search-replace $dev_domain $local_domain
+		cd $local_path && wp search-replace $dev_domain $local_domain
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
@@ -117,7 +117,7 @@ then
 
 		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
 
-		cd $my_webroot/$local_rel_path/ && wp search-replace $stage_domain $local_domain
+		cd $local_path && wp search-replace $stage_domain $local_domain
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
@@ -138,7 +138,7 @@ then
 
 		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
 
-		cd $my_webroot/$local_rel_path/ && wp search-replace $stage_domain $local_domain
+		cd $local_path && wp search-replace $stage_domain $local_domain
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
@@ -172,7 +172,7 @@ then
 
 		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
 
-		cd $my_webroot/$local_rel_path/ && wp search-replace $live_domain $local_domain
+		cd $local_path && wp search-replace $live_domain $local_domain
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
@@ -193,7 +193,7 @@ then
 
 		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
 
-		cd $my_webroot/$local_rel_path/ && wp search-replace $live_domain $local_domain
+		cd $local_path && wp search-replace $live_domain $local_domain
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
