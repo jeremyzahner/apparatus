@@ -5,35 +5,26 @@
 #  
 # Alpha Release
 #
-#	Version: 0.2.0
+#	Version: 0.3.0 - Relying on .env files now for variables.
 ############################################################################
 
 ## CONFIGURATION
-source $PWD/apparatus.conf
-source ~/apparatus/my_apparatus.conf
-
-if [ ! -f $PWD/apparatus.conf ]
+source .env
+#
+if [ ! -f .env]
 then
-	echo $'\n''Cant find your current projects apparatus.conf. Check wether you are in your projects root and the apparatus.conf file exists.'
+	echo $'\n''Cant find your current projects .env file. Check wether you are in your projects root and the .env file exists.'
 	#
 	exit
 fi
-
-if [ ! -f ~/apparatus/my_apparatus.conf ]
-then
-	echo $'\n''Cant find your global my_apparatus.conf. Check wether your my_apparatus.conf file exists in your home directory in the apparatus directory.'
-	#
-	exit
-fi
-
 #
 echo $'\n''Script starting...'
 #
-echo $'\n''Pull State from Dev / Stage / Live (dev/stage/live)?'$'\n'
+echo $'\n''Pull State from Staging / Production (staging/production)?'$'\n'
 #
 read TARGET
-
-if [ "$TARGET" = dev ] || [ "$TARGET" = Dev ] || [ "$TARGET" = DEV ]
+#
+if [ "$TARGET" = staging ] || [ "$TARGET" = Staging ] || [ "$TARGET" = STAGING ]
 then
 ###
 	#
@@ -44,24 +35,24 @@ then
 	if [ "$CHOICE" = a ] || [ "$CHOICE" = A ]
 	then
 		##
-		echo $'\n''Pulling Assets from Dev now...'$'\n'
-		rsync -e ssh -rvzPc --update --stats $dev_ssh_user@$dev_ssh_host:$dev_assets_path/*  $my_webroot/$local_rel_assets_path/ && \
-		echo $'\n''All Assets pushed!'$'\n'
+		echo $'\n''Pulling Assets from Staging-Environment now...'$'\n'
+		rsync -e ssh -rvzPc --update --stats $STAGING_USER@$STAGING_HOST:$STAGING_UPLOADS_PATH/* $DEVELOPMENT_UPLOADS_PATH/ && \
+		echo $'\n''All Assets pulled!'$'\n'
 		##
 	fi
 
 	if [ "$CHOICE" = d ] || [ "$CHOICE" = D ]
 	then
 		##
-		echo $'\n''Pulling DB from Dev now...'$'\n'
+		echo $'\n''Pulling DB from Staging-Environment now...'$'\n'
 
-		ssh $dev_ssh_user@$dev_ssh_host "mysqldump --defaults-extra-file=/home/$dev_ssh_user/apparatus/apparatus.my.cnf --defaults-group-suffix=$dev_db_name -h $dev_db_host $dev_db_name > $dev_assets_path/dbsync.sql" && \
+		ssh $STAGING_USER@$STAGING_HOST "mysqldump -u "$STAGING_DB_USER" "-p$STAGING_DB_PASSWORD" -h $STAGING_DB_HOST $STAGING_DB_NAME > $STAGING_PATH/dbsync.sql" && \
 
-		rsync -e ssh -rvzPc --update --stats $dev_ssh_user@$dev_ssh_host:$dev_assets_path/dbsync.sql $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		rsync -e ssh -rvzPc --update --stats $STAGING_USER@$STAGING_HOST:$STAGING_PATH/dbsync.sql $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		mysql -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" -h $DB_HOST $DB_NAME < $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		cd $local_path && wp search-replace $dev_domain $local_domain
+		cd $DEVELOPMENT_WP_PATH && wp search-replace $STAGING_URL $DEVELOPMENT_URL
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
@@ -70,26 +61,27 @@ then
 	if [ "$CHOICE" = ad ] || [ "$CHOICE" = AD ]
 	then
 		##
-		echo $'\n''Pulling Assets from Dev now...'$'\n'
-		rsync -e ssh -rvzPc --update --stats $dev_ssh_user@$dev_ssh_host:$dev_assets_path/*  $my_webroot/$local_rel_assets_path/ && \
-		echo $'\n''All Assets pushed!'$'\n'
+		echo $'\n''Pulling Assets from Staging-Environment now...'$'\n'
+		rsync -e ssh -rvzPc --update --stats $STAGING_USER@$STAGING_HOST:$STAGING_UPLOADS_PATH/* $DEVELOPMENT_UPLOADS_PATH/ && \
+		echo $'\n''All Assets pulled!'$'\n'
 		##
-		echo $'\n''Pulling DB from Dev now...'$'\n'
+		echo $'\n''Pulling DB from Staging-Environment now...'$'\n'
 
-		ssh $dev_ssh_user@$dev_ssh_host "mysqldump --defaults-extra-file=/home/$dev_ssh_user/apparatus/apparatus.my.cnf --defaults-group-suffix=$dev_db_name -h $dev_db_host $dev_db_name > $dev_assets_path/dbsync.sql" && \
+		ssh $STAGING_USER@$STAGING_HOST "mysqldump -u "$STAGING_DB_USER" "-p$STAGING_DB_PASSWORD" -h $STAGING_DB_HOST $STAGING_DB_NAME > $STAGING_PATH/dbsync.sql" && \
 
-		rsync -e ssh -rvzPc --update --stats $dev_ssh_user@$dev_ssh_host:$dev_assets_path/dbsync.sql $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		rsync -e ssh -rvzPc --update --stats $STAGING_USER@$STAGING_HOST:$STAGING_PATH/dbsync.sql $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		mysql -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" -h $DB_HOST $DB_NAME < $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		cd $local_path && wp search-replace $dev_domain $local_domain
+		cd $DEVELOPMENT_WP_PATH && wp search-replace $STAGING_URL $DEVELOPMENT_URL
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
 	fi
+###
 fi
 ##
-if [ "$TARGET" = stage ] || [ "$TARGET" = Stage ] || [ "$TARGET" = STAGE ]
+if [ "$TARGET" = production ] || [ "$TARGET" = Production ] || [ "$TARGET" = PRODUCTION ]
 then
 ###
 	#
@@ -100,24 +92,24 @@ then
 	if [ "$CHOICE" = a ] || [ "$CHOICE" = A ]
 	then
 		##
-		echo $'\n''Pulling Assets from Stage now...'$'\n'
-		rsync -e ssh -rvzPc --update --stats $stage_ssh_user@$stage_ssh_host:$stage_assets_path/* $my_webroot/$local_rel_assets_path/ && \
-		echo $'\n''All Assets pushed!'$'\n'
+		echo $'\n''Pulling Assets from Production-Environment now...'$'\n'
+		rsync -e ssh -rvzPc --update --stats $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_UPLOADS_PATH/* $DEVELOPMENT_UPLOADS_PATH/ && \
+		echo $'\n''All Assets pulled!'$'\n'
 		##
 	fi
 
 	if [ "$CHOICE" = d ] || [ "$CHOICE" = D ]
 	then
 		##
-		echo $'\n''Pulling DB from Stage now...'$'\n'
+		echo $'\n''Pulling DB from Production-Environment now...'$'\n'
 
-		ssh $stage_ssh_user@$stage_ssh_host "mysqldump --defaults-extra-file=/home/$stage_ssh_user/apparatus/apparatus.my.cnf --defaults-group-suffix=$stage_db_name -h $stage_db_host $stage_db_name > $stage_assets_path/dbsync.sql" && \
+		ssh $PRODUCTION_USER@$PRODUCTION_HOST "mysqldump -u "$PRODUCTION_DB_USER" "-p$PRODUCTION_DB_PASSWORD" -h $PRODUCTION_DB_HOST $PRODUCTION_DB_NAME > $PRODUCTION_PATH/dbsync.sql" && \
 
-		rsync -e ssh -rvzPc --update --stats $stage_ssh_user@$stage_ssh_host:$stage_assets_path/dbsync.sql $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		rsync -e ssh -rvzPc --update --stats $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_PATH/dbsync.sql $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		mysql -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" -h $DB_HOST $DB_NAME < $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		cd $local_path && wp search-replace $stage_domain $local_domain
+		cd $DEVELOPMENT_WP_PATH && wp search-replace $PRODUCTION_URL $DEVELOPMENT_URL
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
@@ -126,76 +118,22 @@ then
 	if [ "$CHOICE" = ad ] || [ "$CHOICE" = AD ]
 	then
 		##
-		echo $'\n''Pulling Assets from Stage now...'$'\n'
-		rsync -e ssh -rvzPc --update --stats $stage_ssh_user@$stage_ssh_host:$stage_assets_path/* $my_webroot/$local_rel_assets_path/ && \
-		echo $'\n''All Assets pushed!'$'\n'
+		echo $'\n''Pulling Assets from Production-Environment now...'$'\n'
+		rsync -e ssh -rvzPc --update --stats $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_UPLOADS_PATH/* $DEVELOPMENT_UPLOADS_PATH/ && \
+		echo $'\n''All Assets pulled!'$'\n'
 		##
-		echo $'\n''Pulling DB from Stage now...'$'\n'
+		echo $'\n''Pulling DB from Production-Environment now...'$'\n'
 
-		ssh $stage_ssh_user@$stage_ssh_host "mysqldump --defaults-extra-file=/home/$stage_ssh_user/apparatus/apparatus.my.cnf --defaults-group-suffix=$stage_db_name -h $stage_db_host $stage_db_name > $stage_assets_path/dbsync.sql" && \
+		ssh $PRODUCTION_USER@$PRODUCTION_HOST "mysqldump -u "$PRODUCTION_DB_USER" "-p$PRODUCTION_DB_PASSWORD" -h $PRODUCTION_DB_HOST $PRODUCTION_DB_NAME > $PRODUCTION_PATH/dbsync.sql" && \
 
-		rsync -e ssh -rvzPc --update --stats $stage_ssh_user@$stage_ssh_host:$stage_assets_path/dbsync.sql $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		rsync -e ssh -rvzPc --update --stats $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_PATH/dbsync.sql $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
+		mysql -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" -h $DB_HOST $DB_NAME < $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
-		cd $local_path && wp search-replace $stage_domain $local_domain
+		cd $DEVELOPMENT_WP_PATH && wp search-replace $PRODUCTION_URL $DEVELOPMENT_URL
 
 		echo $'\n''DB fully synced!'$'\n'
 		##
 	fi
-fi
-##
-if [ "$TARGET" = live ] || [ "$TARGET" = Live ] || [ "$TARGET" = LIVE ]
-then
 ###
-	#
-	echo $'\n''Pull Assets / Database / Assets & Database (A/D/AD)?'$'\n'
-	#
-	read CHOICE
-	if [ "$CHOICE" = a ] || [ "$CHOICE" = A ]
-	then
-		##
-		echo $'\n''Pulling Assets from Live now...'$'\n'
-		rsync -e ssh -rvzPc --update --stats $live_ssh_user@$live_ssh_host:$live_assets_path/* $my_webroot/$local_rel_assets_path/ && \
-		echo $'\n''All Assets pushed!'$'\n'
-		##
-	fi
-
-	if [ "$CHOICE" = d ] || [ "$CHOICE" = D ]
-	then
-		##
-		echo $'\n''Pulling DB from Live now...'$'\n'
-
-		ssh $live_ssh_user@$live_ssh_host "mysqldump --defaults-extra-file=/home/$live_ssh_user/apparatus/apparatus.my.cnf --defaults-group-suffix=$live_db_name -h $live_db_host $live_db_name > $live_assets_path/dbsync.sql" && \
-
-		rsync -e ssh -rvzPc --update --stats $live_ssh_user@$live_ssh_host:$live_assets_path/dbsync.sql $my_webroot/$local_rel_assets_path/dbsync.sql && \
-
-		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
-
-		cd $local_path && wp search-replace $live_domain $local_domain
-
-		echo $'\n''DB fully synced!'$'\n'
-		##
-	fi
-
-	if [ "$CHOICE" = ad ] || [ "$CHOICE" = AD ]
-	then
-		##
-		echo $'\n''Pulling Assets from Live now...'$'\n'
-		rsync -e ssh -rvzPc --update --stats $live_ssh_user@$live_ssh_host:$live_assets_path/* $my_webroot/$local_rel_assets_path/ && \
-		echo $'\n''All Assets pushed!'$'\n'
-		##
-		echo $'\n''Pulling DB from Live now...'$'\n'
-
-		ssh $live_ssh_user@$live_ssh_host "mysqldump --defaults-extra-file=/home/$live_ssh_user/apparatus/apparatus.my.cnf --defaults-group-suffix=$live_db_name -h $live_db_host $live_db_name > $live_assets_path/dbsync.sql" && \
-
-		rsync -e ssh -rvzPc --update --stats $live_ssh_user@$live_ssh_host:$live_assets_path/dbsync.sql $my_webroot/$local_rel_assets_path/dbsync.sql && \
-
-		mysql --defaults-extra-file=~/apparatus/apparatus.my.cnf -h $my_db_host $local_db_name < $my_webroot/$local_rel_assets_path/dbsync.sql && \
-
-		cd $local_path && wp search-replace $live_domain $local_domain
-
-		echo $'\n''DB fully synced!'$'\n'
-		##
-	fi
 fi
