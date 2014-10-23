@@ -5,33 +5,41 @@
 #  
 #	Alpha Release
 #
-#	Version: 0.3.0 - Relying on .env files now for variables.
+#	Version: 0.2.0
 ############################################################################
 
 ## CONFIGURATION
-source .env
-#
-if [ ! -f .env]
+source $PWD/apparatus.conf
+source ~/apparatus/my_apparatus.conf
+
+if [ ! -f $PWD/apparatus.conf ]
 then
-	echo $'\n''Cant find your current projects .env file. Check wether you are in your projects root and the .env file exists.'
+	echo $'\n''Cant find your current projects apparatus.conf. Check wether you are in your projects root and the apparatus.conf file exists.'
 	#
 	exit
 fi
-#
+
+if [ ! -f ~/apparatus/my_apparatus.conf ]
+then
+	echo $'\n''Cant find your global my_apparatus.conf. Check wether your my_apparatus.conf file exists in your home directory in the apparatus directory.'
+	#
+	exit
+fi
+
 echo $'\n''Script starting...'
 ###########
-echo $'\n''The Wordpress directory is '$DEVELOPMENT_WP_PATH
-echo $'\n''Your Uploads/Assets are stored in '$DEVELOPMENT_UPLOADS_PATH'.'$'\n'
+echo $'\n''The Wordpress directory is '$my_webroot/$local_rel_path
+echo $'\n''Your Uploads/Assets are stored in '$my_webroot/$local_rel_assets_path'.'$'\n'
 ###########
-if [ ! -d $DEVELOPMENT_UPLOADS_PATH ]
+if [ ! -d $my_webroot/$local_rel_assets_path ]
 then
-	sudo mkdir $DEVELOPMENT_UPLOADS_PATH
+	sudo mkdir $my_webroot/$local_rel_assets_path
 fi
 ###########
-sudo chown -R $DEVELOPMENT_USER:$DEVELOPMENT_GROUP ./*
-sudo find $DEVELOPMENT_PATH/* -type f -exec chmod 664 {} \; 
-sudo find $DEVELOPMENT_PATH/* -type d -exec chmod 775 {} \;
-sudo find $DEVELOPMENT_PATH/* -type d -exec chmod g+s {} \;
+sudo chown -R www-data:webmasters ./*
+sudo find $my_webroot/$local_rel_path/* -type f -exec chmod 664 {} \; 
+sudo find $my_webroot/$local_rel_path/* -type d -exec chmod 775 {} \;
+sudo find $my_webroot/$local_rel_path/* -type d -exec chmod g+rwxs {} \;
 #
 echo $'\n''All went well. Thanks for using!'$'\n'
 #
