@@ -48,9 +48,9 @@ fi
 ###########
 sudo chown -R www-data:webmasters ./*
 sudo find $my_webroot/$local_rel_path/* -type f -exec chmod 664 {} \; 
-sudo find $my_webroot/$local_rel_path/* -type d -exec chmod 775 {} \;
-sudo find $my_webroot/$local_rel_path/wp-content/cache/ -exec chmod 777 {} \;  
-sudo find $my_webroot/$local_rel_path/* -type d -exec chmod g+s {} \;
+sudo find $my_webroot/$local_rel_path/* -type d -exec chmod 755 {} \;
+sudo find $my_webroot/$local_rel_path/wp-content/cache/ -exec chmod 775 {} \;  
+sudo find $my_webroot/$local_rel_path/* -type d -exec chmod g+rwxs {} \;
 #
 echo $'\n''All went well. Thanks for using!'$'\n'
 #

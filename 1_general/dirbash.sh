@@ -48,7 +48,7 @@ fi
 sudo chown -R www-data:webmasters ./*
 sudo find $my_webroot/$local_rel_path/* -type f -exec chmod 664 {} \; 
 sudo find $my_webroot/$local_rel_path/* -type d -exec chmod 775 {} \;
-sudo find $my_webroot/$local_rel_path/* -type d -exec chmod g+s {} \;
+sudo find $my_webroot/$local_rel_path/* -type d -exec chmod g+rwxs {} \;
 #
 echo $'\n''Permissions all fixed.'$'\n'
 #

@@ -5,7 +5,7 @@
 #  
 #	Alpha Release
 #
-#	Version: 0.1.1
+#	Version: 0.2.1
 ############################################################################
 
 echo $'\n'"This Script was designed for use on a local Ubuntu (or similar Linux) Development Platform, DO NOT use it else where as it may break your system."
@@ -25,8 +25,8 @@ mkdir $HOME/public_html/log/$domain
 
 sudo chown -R www-data:webmasters $domaindir
 sudo find $domaindir -type f -exec chmod 664 {} \; 
-sudo find $domaindir -type d -exec chmod 775 {} \;
-sudo find $domaindir -type d -exec chmod g+s {} \;
+sudo find $domaindir -type d -exec chmod 755 {} \;
+sudo find $domaindir -type d -exec chmod g+rwxs {} \;
 
 # Go There
 cd $domaindir
@@ -75,7 +75,7 @@ ENDCAT
 
 sudo chown -R www-data:webmasters $apachesa
 sudo find $apachesa -type f -exec chmod 664 {} \; 
-sudo find $apachesa -type d -exec chmod 775 {} \;
+sudo find $apachesa -type d -exec chmod 755 {} \;
 sudo find $apachesa -type d -exec chmod g+s {} \;
 
 # Add to Hosts File
