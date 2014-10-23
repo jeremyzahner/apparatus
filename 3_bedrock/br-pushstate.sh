@@ -1,9 +1,9 @@
 #!/bin/bash
 
 ############################################################################
-# Created by Jeremy "Jay" Zahner (@jeremyzahner)
+# 	Created by Jeremy "Jay" Zahner (@jeremyzahner)
 #  
-# Alpha Release
+# 	Alpha Release
 #
 #	Version: 0.3.0 - Relying on .env files now for variables.
 ############################################################################

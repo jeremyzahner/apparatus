@@ -11,7 +11,7 @@
 ## CONFIGURATION
 source .env
 #
-if [ ! -f .env]
+if [ ! -f .env ]
 then
 	echo $'\n''Cant find your current projects .env file. Check wether you are in your projects root and the .env file exists.'
 	#
@@ -29,9 +29,9 @@ then
 fi
 ###########
 sudo chown -R $DEVELOPMENT_USER:$DEVELOPMENT_GROUP ./*
-sudo find $DEVELOPMENT_PATH/* -type f -exec chmod 664 {} \; 
-sudo find $DEVELOPMENT_PATH/* -type d -exec chmod 775 {} \;
-sudo find $DEVELOPMENT_PATH/* -type d -exec chmod g+s {} \;
+sudo find $DEVELOPMENT_WP_PATH/../* -type f -exec chmod 664 {} \; 
+sudo find $DEVELOPMENT_WP_PATH/../* -type d -exec chmod 775 {} \;
+sudo find $DEVELOPMENT_WP_PATH/../* -type d -exec chmod g+s {} \;
 #
 echo $'\n''All went well. Thanks for using!'$'\n'
 #
