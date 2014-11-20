@@ -93,4 +93,40 @@ EOF
 
 echo $'\n'"Apache directories set up."$'\n'
 
+echo $'\n'"Setting up important dependencies..."$'\n'
+
+ssh -T $TARGET /bin/bash << EOF
+#----
+
+	sudo apt-get update
+
+	sudo apt-get -y install git
+
+	sudo apt-get -y install nodejs
+
+	sudo apt-get -y install npm
+
+	sudo \curl -sSL https://get.rvm.io | bash -s stable --rails
+
+	sudo npm install -g bower
+
+	sudo npm install -g grunt-cli
+
+	sudo gem install bundler
+
+	#sudo sh -c 'echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list'
+	#sudo wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add -
+	#sudo apt-get update
+	#sudo apt-get install newrelic-sysmond
+	#sudo nrsysmond-config --set license_key=YOUR_LICENSE_KEY
+	#sudo /etc/init.d/newrelic-sysmond start
+
+	#sudo apt-get update
+	#sudo apt-get install newrelic-php5
+	#sudo echo newrelic-php5 newrelic-php5/application-name string "My Application Name" | debconf-set-selections
+	#sudo echo newrelic-php5 newrelic-php5/license-key string "0123456789abcdef0123456789abcdef01234567" | debconf-set-selections
+
+#----
+EOF
+
 echo $'\n'"All done, thanks for using."$'\n'
