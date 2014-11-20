@@ -1,17 +1,18 @@
 #!/bin/bash
 
-############################################################################
+###################################################################################################################################################
 # 	Created by Jeremy "Jay" Zahner (@jeremyzahner)
 #  
 # 	Alpha Release
 #
 #	Version: 0.3.0 - Relying on .env files now for variables.
-############################################################################
+#
+###################################################################################################################################################
 
 ## CONFIGURATION
 source .env
 #
-if [ ! -f .env]
+if [ ! -f .env ]
 then
 	echo $'\n''Cant find your current projects .env file. Check wether you are in your projects root and the .env file exists.'
 	#
@@ -36,7 +37,9 @@ then
 	then
 		##
 		echo $'\n''Pushing Assets to Staging-Environment now...'$'\n'
+
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/* $STAGING_USER@$STAGING_HOST:$STAGING_UPLOADS_PATH/ && \
+
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 	fi
@@ -45,6 +48,7 @@ then
 	then
 		##
 		echo $'\n''Pushing DB to Staging-Environment now...'$'\n'
+
 		mysqldump -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" $DEVELOPMENT_DB_NAME > $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/dbsync.sql $STAGING_USER@$STAGING_HOST:$STAGING_PATH/dbsync.sql && \
@@ -61,10 +65,13 @@ then
 	then
 		##
 		echo $'\n''Pushing Assets to Staging-Environment now...'$'\n'
+
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/* $STAGING_USER@$STAGING_HOST:$STAGING_UPLOADS_PATH/ && \
+
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 		echo $'\n''Pushing DB to Staging-Environment now...'$'\n'
+
 		mysqldump -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" $DEVELOPMENT_DB_NAME > $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/dbsync.sql $STAGING_USER@$STAGING_HOST:$STAGING_PATH/dbsync.sql && \
@@ -91,7 +98,9 @@ then
 	then
 		##
 		echo $'\n''Pushing Assets to Production-Environment now...'$'\n'
+
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/* $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_UPLOADS_PATH/ && \
+
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 	fi
@@ -100,6 +109,7 @@ then
 	then
 		##
 		echo $'\n''Pushing DB to Production-Environment now...'$'\n'
+
 		mysqldump -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" $DEVELOPMENT_DB_NAME > $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/dbsync.sql $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_PATH/dbsync.sql && \
@@ -116,10 +126,13 @@ then
 	then
 		##
 		echo $'\n''Pushing Assets to Production-Environment now...'$'\n'
+
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/* $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_UPLOADS_PATH/ && \
+
 		echo $'\n''All Assets pushed!'$'\n'
 		##
 		echo $'\n''Pushing DB to Production-Environment now...'$'\n'
+		
 		mysqldump -u "$DEVELOPMENT_DB_USER" "-p$DEVELOPMENT_DB_PASSWORD" $DEVELOPMENT_DB_NAME > $DEVELOPMENT_UPLOADS_PATH/dbsync.sql && \
 
 		rsync -e ssh -rvzPc --update --stats $DEVELOPMENT_UPLOADS_PATH/dbsync.sql $PRODUCTION_USER@$PRODUCTION_HOST:$PRODUCTION_PATH/dbsync.sql && \
