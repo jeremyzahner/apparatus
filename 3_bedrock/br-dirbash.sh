@@ -29,9 +29,9 @@ then
 fi
 ###########
 sudo chown -R $DEVELOPMENT_USER:$DEVELOPMENT_GROUP ./*
-sudo find $DEVELOPMENT_WP_PATH/../* -type f -exec chmod 664 {} \; 
-sudo find $DEVELOPMENT_WP_PATH/../* -type d -exec chmod 775 {} \;
-sudo find $DEVELOPMENT_WP_PATH/../* -type d -exec chmod g+s {} \;
+sudo find $DEVELOPMENT_WP_PATH/../../* -type f -exec chmod 664 {} \; 
+sudo find $DEVELOPMENT_WP_PATH/../../* -type d -exec chmod 775 {} \;
+sudo find $DEVELOPMENT_WP_PATH/../../* -type d -exec chmod g+s {} \;
 #
 echo $'\n''All went well. Thanks for using!'$'\n'
 #

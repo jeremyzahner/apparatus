@@ -9,35 +9,86 @@
 ############################################################################
 
 echo $'\n'"This Script was designed for use on a local Ubuntu (or similar Linux) Development Platform, DO NOT use it else where as it may break your system."
+#
+echo $'\n''Please enter your login credentials (user@domain.com)?'$'\n'
+#
+read TARGET
 
-echo $'\n'"Setting up deployment user."$'\n'
+echo $'\n'"Checking if deployment user exists."$'\n'
 
-adduser deploy
+ssh -T $TARGET /bin/bash << EOF
+#----
 
-passwd -l deploy
+if [ ! id -u deploy > /dev/null 2>&1  ]
+then
 
-su - deploy
+	echo $'\n'"Deployment user does not exist, setting up right now..."$'\n'
 
-cd ~
+	adduser deploy
 
-mkdir .ssh
+	useradd -g www-data deploy
+	
+	passwd -l deploy
 
-chmod 700 .ssh
+else
 
-touch .ssh/authorized_keys
+	echo $'\n'"Deployment user already exists."$'\n'
 
-exit
+fi
 
-cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+#----
+EOF
 
-chmod 600 /home/deploy/.ssh/authorized_keys
+echo $'\n'"Checking if authorized_keys file is already set up."$'\n'
 
-deploy_to=/var/www
-mkdir -p /var/www
-chown deploy:www-data /var/www
-umask 0002
-chmod g+s /var/www
-mkdir /var/www/{releases,shared}
-chown deploy:www-data /var/www/{releases,shared}
+ssh -T $TARGET /bin/bash << EOF
+#----
+
+	if [ -d /home/deploy/.ssh ] && [ ! -f /home/deploy/.ssh/authorized_keys ]
+	then
+
+		echo $'\n'"Authorized keys for deployment user not set up. Setting up right now..."$'\n'
+		
+		cd /home/deploy
+		
+		mkdir .ssh
+		
+		chmod 700 .ssh
+		chown -R deploy:deploy .ssh
+
+		touch .ssh/authorized_keys
+
+		chown deploy:deploy .ssh/authorized_keys
+
+		cp /root/.ssh/authorized_keys /home/deploy/.ssh/authorized_keys
+
+		chmod 600 /home/deploy/.ssh/authorized_keys
+
+		echo $'\n'"Authorized keys for deployment user created."$'\n'
+
+	else
+
+		echo $'\n'"Authorized keys for deployment user already exists."$'\n'
+
+	fi
+
+#----
+EOF
+
+echo $'\n'"Setting up apache directories..."$'\n'
+
+ssh -T $TARGET /bin/bash << EOF
+#----
+	sudo mkdir -p /var/www
+
+	sudo chown -R www-data:www-data /var/www
+
+	umask 0002 /var/www
+	
+	sudo chmod -R g+s /var/www
+#----
+EOF
+
+echo $'\n'"Apache directories set up."$'\n'
 
 echo $'\n'"All done, thanks for using."$'\n'

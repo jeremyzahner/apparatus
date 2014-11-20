@@ -11,7 +11,7 @@
 ## CONFIGURATION
 source .env
 #
-if [ ! -f .env]
+if [ ! -f .env ]
 then
 	echo $'\n''Cant find your current projects .env file. Check wether you are in your projects root and the .env file exists.'
 	#
