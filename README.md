@@ -1,7 +1,7 @@
 Apparatus
 ======
 
-*THIS PROJECT IS IN ALPHA PHASE*
+*THIS PROJECT IS NO LONGER MAINTAINED*
 
 "Apparatus" is latin and means "Machine".
 
